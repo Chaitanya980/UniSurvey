@@ -131,6 +131,13 @@ cd unisurvey
 | CI/CD       | GitHub + Jenkins    |
 
 ---
+## 🖼️ Snapshots
+
+![Home Page](snapshots/Home.png)
+![Docker](snapshots/Docker.jpg)
+![Pipeline](snapshots/Pipeline.png)
+![Welcome Page](snapshots/Welcome.png)
+![Kubernetes](snapshots/kubernetes.png)
 
 
 ## 👥 Contributors
