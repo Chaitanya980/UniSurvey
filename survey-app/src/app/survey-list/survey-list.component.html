@@ -1,0 +1,36 @@
+<!-- Html page for Listing all the surveys  -->
+<div class="container mt-4">
+  <h1 class="text-center">All Surveys</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th> 
+        <th>Address</th> 
+        <th>Email</th>
+        <th>Survey Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let survey of surveys">
+        <td>{{ survey.id }}</td>
+        <td>{{ survey.username }}</td>
+        <td>{{ survey.address }}</td> 
+        <td>{{ survey.email }}</td>
+        <td>{{ survey.surveyDate }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm mr-2" (click)="editSurvey(survey.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteSurvey(survey.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-primary" routerLink="/">Back to Home</button>
+</div>
+
+
+<footer class="footer mt-4 bg-green text-white text-center p-3">
+  <span>&copy; Chaitanya Chaudhari | Yash Dayma | Prathmesh Bachhav | Gitesh Ahirrao | 2025</span>
+</footer>

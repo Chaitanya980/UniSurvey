@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-survey
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: student-survey
+  template:
+    metadata:
+      labels:
+        app: student-survey
+    spec:
+      containers:
+      - name: student-survey
+        image: chaitanyachaudhari07/student-survey:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://database-1.c5nqnih8cugh.us-east-1.rds.amazonaws.com:3306/survey_db"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "student_survey"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "Chait_4847"

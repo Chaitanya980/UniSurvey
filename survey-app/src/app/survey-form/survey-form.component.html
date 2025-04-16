@@ -1,0 +1,167 @@
+<!-- Header  -->
+<header class="header p-4">
+    <div class="container-fluid d-flex flex-row justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <!-- <img src="s" alt="CS department logo"> -->
+        <span class="hello-text ms-2">GEORGE MASON UNIVERSITY</span>
+      </div>
+      <nav class="nav-bar">
+        <a href="#">Home</a>
+      </nav>
+    </div>
+  </header>
+  <!-- Cookie implementation -->
+  <div class="text-center my-3">
+    <div id="greeting" [innerHTML]="greetingMessage"></div>
+    <div id="changeName" *ngIf="userName">
+      <a href="#" (click)="changeUsername()">Click here if this is not you!</a>
+    </div>
+  </div>
+  <!-- Form input fields -->
+  <main class="container mt-4">
+    <h1 class="text-center">Computer Science Department Survey</h1>
+    <form #surveyForm="ngForm" (ngSubmit)="validateForm($event)" class="p-4 border rounded bg-light shadow">
+      <div class="form-group">
+        <p class="pt-2 pb-2"> (Required fields are indicated by a <span class="star">*</span> mark )</p>
+        <label for="username">Username *</label>
+        <input type="text" id="username" name="username" class="form-control" [(ngModel)]="formData.username" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="address">Street Address *</label>
+        <input type="text" id="address" name="address" class="form-control" [(ngModel)]="formData.address" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="zipcode">Zipcode *</label>
+          <input type="text" id="zipcode" name="zip" class="form-control" [(ngModel)]="formData.zip" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="city">City *</label>
+          <input type="text" id="city" name="city" class="form-control" [(ngModel)]="formData.city" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="state">State *</label>
+          <input type="text" id="state" name="state" class="form-control" [(ngModel)]="formData.state" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Telephone *</label>
+        <input type="tel" id="phone" name="phone" class="form-control" [(ngModel)]="formData.phone" placeholder="+1 123-456-7890" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" class="form-control" [(ngModel)]="formData.email" placeholder="example@gmu.edu" required>
+      </div>
+      <div class="form-group">
+        <label for="url">Personal Website</label>
+        <input type="url" id="url" name="url" class="form-control" [(ngModel)]="formData.url" placeholder="https://example.com">
+      </div>
+      <div class="form-group">
+        <label for="survey-date">Date of Survey *</label>
+        <input type="date" id="survey-date" name="survey-date" class="form-control" [(ngModel)]="formData.surveyDate" required>
+      </div>
+      <fieldset class="form-group">
+        <legend>What did you like most about the campus?</legend>
+        <div class="form-check">
+          <input type="checkbox" id="students" name="likes" class="form-check-input" [checked]="formData.likes.includes('students')" (change)="toggleLike('students')">
+          <label for="students" class="form-check-label">Students</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="location" name="likes" class="form-check-input" [checked]="formData.likes.includes('location')" (change)="toggleLike('location')">
+          <label for="location" class="form-check-label">Location</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="campus" name="likes" class="form-check-input" [checked]="formData.likes.includes('campus')" (change)="toggleLike('campus')">
+          <label for="campus" class="form-check-label">Campus</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="atmosphere" name="likes" class="form-check-input" [checked]="formData.likes.includes('atmosphere')" (change)="toggleLike('atmosphere')">
+          <label for="atmosphere" class="form-check-label">Atmosphere</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="dorms" name="likes" class="form-check-input" [checked]="formData.likes.includes('dorms')" (change)="toggleLike('dorms')">
+          <label for="dorms" class="form-check-label">Dorm Rooms</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="sports" name="likes" class="form-check-input" [checked]="formData.likes.includes('sports')" (change)="toggleLike('sports')">
+          <label for="sports" class="form-check-label">Sports</label>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>How did you become interested in the university?</legend>
+        <div class="form-check">
+          <input type="radio" id="friends" name="interest" class="form-check-input" [(ngModel)]="formData.interest" value="friends">
+          <label for="friends" class="form-check-label">Friends</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="television" name="interest" class="form-check-input" [(ngModel)]="formData.interest" value="television">
+          <label for="television" class="form-check-label">Television</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="internet" name="interest" class="form-check-input" [(ngModel)]="formData.interest" value="internet">
+          <label for="internet" class="form-check-label">Internet</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="other" name="interest" class="form-check-input" [(ngModel)]="formData.interest" value="other" (click)="toggleOtherInput(true)">
+          <label for="other" class="form-check-label">Other</label>
+        </div>
+        <div id="other-input" [style.display]="formData.interest === 'other' ? 'block' : 'none'" style="margin-top: 10px;">
+          <input type="text" id="other-text" class="form-control" [(ngModel)]="formData.otherText" name="otherText" placeholder="Please specify">
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="comments">Additional Comments</label>
+        <textarea id="comments" name="comments" class="form-control" [(ngModel)]="formData.comments" rows="4" placeholder="Enter Comments here"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="recommendation">Likelihood of Recommending This School *</label>
+        <select id="recommendation" name="recommendation" class="form-control" [(ngModel)]="formData.recommendation" required>
+          <option value="Very Likely">Very Likely</option>
+          <option value="Likely">Likely</option>
+          <option value="Unlikely">Unlikely</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="grad-month">High School Graduation Month *</label>
+        <input list="months" id="grad-month" name="grad-month" class="form-control" [(ngModel)]="formData.gradMonth" required>
+        <datalist id="months">
+          <option value="January">
+          <option value="February">
+          <option value="March">
+          <option value="April">
+          <option value="May">
+          <option value="June">
+          <option value="July">
+          <option value="August">
+          <option value="September">
+          <option value="October">
+          <option value="November">
+          <option value="December">
+        </datalist>
+      </div>
+      <div class="form-group">
+        <label for="grad-year">High School Graduation Year *</label>
+        <input type="text" id="grad-year" name="grad-year" class="form-control" [(ngModel)]="formData.gradYear" required>
+      </div>
+      <div class="form-group">
+        <label for="data">Data (Enter 10 numbers between 1-100, separated by commas) *</label>
+        <input type="text" id="data" name="data" class="form-control" [(ngModel)]="formData.data" placeholder="e.g., 10,20,30,40,50,60,70,80,90,100" required (blur)="computeStat()">
+        <small id="data-error" class="text-danger">{{ dataError }}</small>
+      </div>
+      <div class="form-group">
+        <label for="average">Average</label>
+        <input type="text" id="average" name="average" class="form-control" [(ngModel)]="formData.average" readonly>
+      </div>
+      <div class="form-group">
+        <label for="maximum">Maximum</label>
+        <input type="text" id="maximum" name="maximum" class="form-control" [(ngModel)]="formData.maximum" readonly>
+      </div>
+      <!-- Submit and Reset Button  -->
+      <button type="submit" class="btn btn-success btn-block">Submit Survey</button>
+      <button type="button" class="btn btn-danger btn-block" (click)="resetForm()">Reset Form</button>
+    </form>
+  </main>
+  <!-- Footer  -->
+  <footer class="footer mt-4 bg-green text-white text-center p-3">
+    <span>&copy; Chaitanya Chaudhari |Yash Dayma |Prathmesh Bachhav|Gitesh Ahirrao | 2025</span>
+  </footer>

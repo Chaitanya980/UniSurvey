@@ -1,0 +1,36 @@
+
+
+{
+    "zipcodes": [
+        {
+            "zip": "22312",
+            "city": "Alexandria",
+            "state": "VA"
+        },
+        {
+            "zip": "22030",
+            "city": "Fairfax",
+            "state": "VA"
+        },
+        {
+            "zip": "22301",
+            "city": "Rockville",
+            "state": "MD"
+        },
+        {
+            "zip": "20148",
+            "city": "Ashburn",
+            "state": "VA"
+        },
+        {
+            "zip": "90002",
+            "city": "Los Angeles",
+            "state": "California"
+        },
+        {
+            "zip": "94043",
+            "city": "Santa Clara County",
+            "state": "California"
+        }
+    ]
+}
